@@ -53,20 +53,26 @@ function panacekRight(elementSelector, positionChange) {
 	let element = document.querySelector(elementSelector);
 	let currentPosition = parseInt(element.style.left);
 	element.style.left = (currentPosition + positionChange) + 'px';
+	panacekX = (currentPosition + positionChange);
 	element.src = "obrazky/panacek-vpravo.png";
+	console.log(panacekX)
+		
 } 
 
 function panacekLeft(elementSelector, positionChange) {
 	let element = document.querySelector(elementSelector);
 	let currentPosition = parseInt(element.style.left);
 	element.style.left = (currentPosition - positionChange) + 'px';
+	panacekX = (currentPosition - positionChange);
 	element.src = "obrazky/panacek-vlevo.png";
+	console.log(panacekX);
 } 
 
 function panacekUp(elementSelector, positionChange) {
 	let element = document.querySelector(elementSelector);
 	let currentPosition = parseInt(element.style.top);
 	element.style.top = (currentPosition - positionChange) + 'px';
+	panacekY = (currentPosition - positionChange);
 	element.src = "obrazky/panacek-nahoru.png";
 } 
 
@@ -74,13 +80,11 @@ function panacekDown(elementSelector, positionChange) {
 	let element = document.querySelector(elementSelector);
 	let currentPosition = parseInt(element.style.top);
 	element.style.top = (currentPosition + positionChange) + 'px';
+	panacekY = (currentPosition + positionChange);
 	element.src = "obrazky/panacek.png";
 } 
 
-console.log(panacekX)
-console.log(panacekY);
-console.log(minceX);
-console.log(minceY);
+
 
 //přijde k minci
 function bod () {
@@ -89,10 +93,10 @@ function bod () {
 	//1. zahraj zvuk sebrání mince
 	//document.querySelector('#zvukmince').play();
 	//2. posuň minci na jiný random
-	//document.querySelector('#mince').style.left = minceX;
-	//document.querySelector('#mince').style.top = minceY;
+	document.querySelector('#mince').style.left = minceX;
+	document.querySelector('#mince').style.top = minceY;
 	//3. přičti bod
-	//score.innerHTML = score + 1;
+	score.innerHTML = score + 1;
 	}
 	
 }
