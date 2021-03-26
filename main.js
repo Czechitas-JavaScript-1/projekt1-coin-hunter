@@ -18,15 +18,23 @@ const minceSirka = 36;
 const minceVyska = 36; 
 let score = document.querySelector('#score').innerHTML
 
-minceX =  Math.random() * (window.innerWidth - minceSirka) + 'px'
-minceY = Math.random() * (window.innerHeight - minceVyska) + 'px'
+panacekX =  Math.floor(Math.random() * (window.innerWidth - panacekSirka))
+panacekY =  Math.floor(Math.random() * (window.innerWidth - panacekVyska))
+
+minceX =  Math.floor(Math.random() * (window.innerWidth - minceSirka))
+minceY = Math.floor(Math.random() * (window.innerHeight - minceVyska))
+
+console.log(panacekX)
+console.log(panacekX + panacekSirka);
+console.log(minceX);
+console.log(minceX + minceSirka);
 
 
 //init
 function init() {
 	//minceX a minceY umísti někde random
-	document.querySelector('#mince').style.left = minceX;
-	document.querySelector('#mince').style.top = minceY;
+	document.querySelector('#mince').style.left = minceX + 'px';
+	document.querySelector('#mince').style.top = minceY + 'px';
 	//panáčka zaparkuj na střed
 	document.querySelector('#panacek').style.left = window.innerWidth * 0.5 - (panacekSirka * 0.5) + 'px';
 	document.querySelector('#panacek').style.top = window.innerHeight * 0.5 - (panacekSirka * 0.5) + 'px';
@@ -69,6 +77,11 @@ function panacekDown(elementSelector, positionChange) {
 	element.src = "obrazky/panacek.png";
 } 
 
+console.log(panacekX)
+console.log(panacekY);
+console.log(minceX);
+console.log(minceY);
+
 //přijde k minci
 function bod () {
 	if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
@@ -83,6 +96,7 @@ function bod () {
 	}
 	
 }
+ 
 
 //zkontroluj vítezství
 function winner () {
@@ -102,6 +116,7 @@ function winner () {
 //onkeydown (pravá šipka)
 document.addEventListener("keydown", function(event) {
 	if (event.key === "ArrowRight") {
+		bod();
 		panacekRight('#panacek', 10);
 		} 		
 });
@@ -109,6 +124,7 @@ document.addEventListener("keydown", function(event) {
 //onkeydown (levá šipka)
 document.addEventListener("keydown", function(event) {
 	if (event.key === "ArrowLeft") {
+		bod();
 		panacekLeft('#panacek', 10);
 		}
 	});
@@ -117,6 +133,7 @@ document.addEventListener("keydown", function(event) {
 //onkeydown (šipka nahoru)
 document.addEventListener("keydown", function(event) {
 	if (event.key === "ArrowUp") {
+		bod();
 		panacekUp('#panacek', 10);
 		}
 });
@@ -124,6 +141,7 @@ document.addEventListener("keydown", function(event) {
 //onkeydown (šipka dolů)
 document.addEventListener("keydown", function(event) {
 	if (event.key === "ArrowDown") {
+		bod();
 		panacekDown('#panacek', 10);
 		} 
 });
