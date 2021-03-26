@@ -9,20 +9,15 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body>
-
-	<button onclick="panacekRight('#panacek', 10)">vpravo</button>
-	<button onclick="panacekLeft('#panacek', 10)">vlevo</button>
-	<button onclick="panacekUp('#panacek', 10)">nahoru</button>
-	<button onclick="panacekDown('#panacek', 10)">dolu</button>
-
-
+<body onkyedown= "stiskKlavesy(event)">
 
 	<img id="panacek" src="obrazky/panacek.png" alt="Panáček">
 
 	<img id="mince" src="obrazky/mince.png" alt="Mince">
 
 	<div id="score">0</div>
+
+	<div id="hlaskaVitez"></div>
 
 	<audio id="hudba" src="zvuky/hudba.mp3" autoplay loop></audio>
 
