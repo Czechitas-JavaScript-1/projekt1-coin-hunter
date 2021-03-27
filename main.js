@@ -26,6 +26,7 @@ function init() {
 	document.querySelector('#panacek').style.top = window.innerHeight * 0.5 - (panacekSirka * 0.5) + 'px';
 	//body na nulu
 	document.querySelector('#score').innerHTML = "0";
+	score = 0;
 }
 init();
 
