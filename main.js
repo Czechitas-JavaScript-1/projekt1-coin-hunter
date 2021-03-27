@@ -16,7 +16,7 @@ let minceX = document.querySelector('#mince').style.left;
 let minceY = document.querySelector('#mince').style.top;
 const minceSirka = 36;
 const minceVyska = 36; 
-let score = document.querySelector('#score').innerHTML
+let score = parseInt(document.querySelector('#score').innerHTML)
 
 panacekX =  Math.floor(Math.random() * (window.innerWidth - panacekSirka))
 panacekY =  Math.floor(Math.random() * (window.innerWidth - panacekVyska))
@@ -89,14 +89,16 @@ function panacekDown(elementSelector, positionChange) {
 //přijde k minci
 function bod () {
 	if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
-		alert("funguju")
+		//alert("funguju")
 	//1. zahraj zvuk sebrání mince
 	//document.querySelector('#zvukmince').play();
 	//2. posuň minci na jiný random
-	document.querySelector('#mince').style.left = minceX;
-	document.querySelector('#mince').style.top = minceY;
+	document.querySelector('#mince').style.left = Math.floor(Math.random() * (window.innerWidth - minceSirka)) + 'px';
+	document.querySelector('#mince').style.top = Math.floor(Math.random() * (window.innerHeight - minceVyska)) + 'px';
 	//3. přičti bod
-	score.innerHTML = score + 1;
+	document.querySelector('#score').innerHTML = score + 1;
+	score = score + 1;
+	console.log(score);
 	}
 	
 }
@@ -104,7 +106,7 @@ function bod () {
 
 //zkontroluj vítezství
 function winner () {
-	if (score == 5) {
+	if (score == 1) {
 		//zahraj fanfáru
 		//document.querySelector('#zvukfanfara').play();
 		//vypiš vítěznou hlášku
