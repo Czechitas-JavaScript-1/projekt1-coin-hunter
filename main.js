@@ -24,11 +24,6 @@ panacekY =  Math.floor(Math.random() * (window.innerWidth - panacekVyska))
 minceX =  Math.floor(Math.random() * (window.innerWidth - minceSirka))
 minceY = Math.floor(Math.random() * (window.innerHeight - minceVyska))
 
-console.log(panacekX)
-console.log(panacekX + panacekSirka);
-console.log(minceX);
-console.log(minceX + minceSirka);
-
 
 //init
 function init() {
@@ -89,15 +84,16 @@ function panacekDown(elementSelector, positionChange) {
 //přijde k minci
 function bod () {
 	if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
-		//alert("funguju")
 	//1. zahraj zvuk sebrání mince
 	//document.querySelector('#zvukmince').play();
 	//2. posuň minci na jiný random
-	document.querySelector('#mince').style.left = Math.floor(Math.random() * (window.innerWidth - minceSirka)) + 'px';
-	document.querySelector('#mince').style.top = Math.floor(Math.random() * (window.innerHeight - minceVyska)) + 'px';
+	minceX = Math.floor(Math.random() * (window.innerWidth - minceSirka));
+	minceY = Math.floor(Math.random() * (window.innerHeight - minceVyska));
+	document.querySelector('#mince').style.left = minceX + 'px';
+	document.querySelector('#mince').style.top = minceY + 'px';
 	//3. přičti bod
-	document.querySelector('#score').innerHTML = score + 1;
 	score = score + 1;
+	document.querySelector('#score').innerHTML = score;
 	console.log(score);
 	}
 	
@@ -123,6 +119,7 @@ function winner () {
 document.addEventListener("keydown", function(event) {
 	if (event.key === "ArrowRight") {
 		bod();
+		winner();
 		panacekRight('#panacek', 10);
 		} 		
 });
@@ -131,6 +128,7 @@ document.addEventListener("keydown", function(event) {
 document.addEventListener("keydown", function(event) {
 	if (event.key === "ArrowLeft") {
 		bod();
+		winner();
 		panacekLeft('#panacek', 10);
 		}
 	});
@@ -140,6 +138,7 @@ document.addEventListener("keydown", function(event) {
 document.addEventListener("keydown", function(event) {
 	if (event.key === "ArrowUp") {
 		bod();
+		winner();
 		panacekUp('#panacek', 10);
 		}
 });
@@ -148,6 +147,7 @@ document.addEventListener("keydown", function(event) {
 document.addEventListener("keydown", function(event) {
 	if (event.key === "ArrowDown") {
 		bod();
+		winner();
 		panacekDown('#panacek', 10);
 		} 
 });
