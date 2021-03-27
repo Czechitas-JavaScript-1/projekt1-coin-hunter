@@ -41,6 +41,16 @@ body {
 	color: var(--score);
 }
 
+#vitezhlaska{
+	position: absolute;
+	top: 50px;
+	left: 250px;
+	font-family: 'Press Start 2P', sans-serif;
+	font-size: 26px;
+	z-index: 999;
+	color: var(--score);
+}
+
 #panacek,
 #mince {
 	position: absolute;
@@ -48,7 +58,6 @@ body {
 
 #panacek {
 	z-index: 1;
-	
-	
+		
 }
 

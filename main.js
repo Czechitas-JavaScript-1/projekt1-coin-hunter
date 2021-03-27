@@ -1,19 +1,10 @@
-// toto budeš potřebovat později
-/*
-if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
-	// panacek a mince se prekryvaji
-}
-*/
 
-
-// sem začni psát svůj program
-
-let panacekX = document.querySelector('#panacek').style.left;
-let panacekY = document.querySelector('#panacek').style.top;
+let panacekX 
+let panacekY 
 const panacekSirka = 64;
 const panacekVyska = 70;
-let minceX = document.querySelector('#mince').style.left;
-let minceY = document.querySelector('#mince').style.top;
+let minceX 
+let minceY 
 const minceSirka = 36;
 const minceVyska = 36; 
 let score = parseInt(document.querySelector('#score').innerHTML)
@@ -35,12 +26,14 @@ function init() {
 	document.querySelector('#panacek').style.top = window.innerHeight * 0.5 - (panacekSirka * 0.5) + 'px';
 	//body na nulu
 	document.querySelector('#score').innerHTML = "0";
-	//začni hrát písničku (onAnyKeyPress asi)
-	//document.querySelector('#hudba').play();
 }
 init();
-		
-/* _______________________________________________________ */
+
+//přehraj hudbu
+function prehraj(elementSelector) {
+	let audioElement = document.querySelector(elementSelector);
+	audioElement.play();
+}
 
 //pohyb panáčka
 
@@ -50,8 +43,7 @@ function panacekRight(elementSelector, positionChange) {
 	element.style.left = (currentPosition + positionChange) + 'px';
 	panacekX = (currentPosition + positionChange);
 	element.src = "obrazky/panacek-vpravo.png";
-	console.log(panacekX)
-		
+	prehraj('#hudba');
 } 
 
 function panacekLeft(elementSelector, positionChange) {
@@ -60,7 +52,7 @@ function panacekLeft(elementSelector, positionChange) {
 	element.style.left = (currentPosition - positionChange) + 'px';
 	panacekX = (currentPosition - positionChange);
 	element.src = "obrazky/panacek-vlevo.png";
-	console.log(panacekX);
+	prehraj('#hudba');
 } 
 
 function panacekUp(elementSelector, positionChange) {
@@ -69,6 +61,7 @@ function panacekUp(elementSelector, positionChange) {
 	element.style.top = (currentPosition - positionChange) + 'px';
 	panacekY = (currentPosition - positionChange);
 	element.src = "obrazky/panacek-nahoru.png";
+	prehraj('#hudba');
 } 
 
 function panacekDown(elementSelector, positionChange) {
@@ -77,15 +70,15 @@ function panacekDown(elementSelector, positionChange) {
 	element.style.top = (currentPosition + positionChange) + 'px';
 	panacekY = (currentPosition + positionChange);
 	element.src = "obrazky/panacek.png";
+	prehraj('#hudba');
 } 
 
 
-
-//přijde k minci
+//zkontroluj pozici panáček - mince
 function bod () {
 	if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
 	//1. zahraj zvuk sebrání mince
-	//document.querySelector('#zvukmince').play();
+	prehraj('#zvukmince');
 	//2. posuň minci na jiný random
 	minceX = Math.floor(Math.random() * (window.innerWidth - minceSirka));
 	minceY = Math.floor(Math.random() * (window.innerHeight - minceVyska));
@@ -94,25 +87,19 @@ function bod () {
 	//3. přičti bod
 	score = score + 1;
 	document.querySelector('#score').innerHTML = score;
-	console.log(score);
 	}
 	
 }
- 
 
 //zkontroluj vítezství
 function winner () {
-	if (score == 1) {
+	if (score == 5) {
 		//zahraj fanfáru
-		//document.querySelector('#zvukfanfara').play();
+		prehraj('#zvukfanfara');
 		//vypiš vítěznou hlášku
-		document.querySelector('#hlaskaVitez').innerHTML = "Vítěz!!!";
-		//chtělo by to panáčka s rukama nahoře :)
-		document.querySelector('#panacek').src = "obrazky/panacek-vitez.png";
-		//vrátit do init??
+		document.querySelector('#vitezhlaska').innerHTML = "Vítěz!!!";
 	}
 }
-/* _______________________________________________________ */
 
 
 //onkeydown (pravá šipka)
@@ -131,8 +118,7 @@ document.addEventListener("keydown", function(event) {
 		winner();
 		panacekLeft('#panacek', 10);
 		}
-	});
-
+});
 
 //onkeydown (šipka nahoru)
 document.addEventListener("keydown", function(event) {
@@ -152,21 +138,3 @@ document.addEventListener("keydown", function(event) {
 		} 
 });
 
-
-//if panáček je na minci, tj. pozice panáček == pozice mince (nápověda nahoře)
-	//1. zahraj zvuk sebrání mince
-	//2. posuň minci na jiný random
-	//3. přičti bod	
-	//zkontroluj vítezství
-		//if body == 5: 
-		//zahraj fanfáru
-		//vypiš vítěznou hlášku
-		//chtělo by to panáčka s rukama nahoře
-		//vrátit do init??	
-
-//else:
-	//panáček doprava
-		//1. vyměň obrázek za koukající do prava
-		//2. přičti k panacekX nějakou inteligentní hodnotu (bacha, ať nezdrhne z okna  0 - window.innerWidth)
-		
-/* _____________________________________________________ */
