@@ -1,19 +1,19 @@
 
-let panacekX 
-let panacekY 
+let panacekX;
+let panacekY; 
 const panacekSirka = 64;
 const panacekVyska = 70;
-let minceX 
-let minceY 
+let minceX; 
+let minceY; 
 const minceSirka = 36;
 const minceVyska = 36; 
-let score = parseInt(document.querySelector('#score').innerHTML)
+let score = parseInt(document.querySelector('#score').innerHTML);
 
-panacekX =  Math.floor(Math.random() * (window.innerWidth - panacekSirka))
-panacekY =  Math.floor(Math.random() * (window.innerWidth - panacekVyska))
+panacekX =  Math.floor(window.innerWidth * 0.5 - (panacekSirka * 0.5));
+panacekY =  Math.floor(window.innerHeight * 0.5 - (panacekVyska * 0.5));
 
-minceX =  Math.floor(Math.random() * (window.innerWidth - minceSirka))
-minceY = Math.floor(Math.random() * (window.innerHeight - minceVyska))
+minceX =  Math.floor(Math.random() * (window.innerWidth - minceSirka));
+minceY = Math.floor(Math.random() * (window.innerHeight - minceVyska));
 
 
 //init
@@ -22,8 +22,8 @@ function init() {
 	document.querySelector('#mince').style.left = minceX + 'px';
 	document.querySelector('#mince').style.top = minceY + 'px';
 	//panáčka zaparkuj na střed
-	document.querySelector('#panacek').style.left = window.innerWidth * 0.5 - (panacekSirka * 0.5) + 'px';
-	document.querySelector('#panacek').style.top = window.innerHeight * 0.5 - (panacekSirka * 0.5) + 'px';
+	document.querySelector('#panacek').style.left = panacekX + 'px';
+	document.querySelector('#panacek').style.top = panacekY + 'px';
 	//body na nulu
 	document.querySelector('#score').innerHTML = "0";
 	score = 0;
