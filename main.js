@@ -41,8 +41,11 @@ function prehraj(elementSelector) {
 function panacekRight(elementSelector, positionChange) {
 	let element = document.querySelector(elementSelector);
 	let currentPosition = parseInt(element.style.left);
-	element.style.left = (currentPosition + positionChange) + 'px';
-	panacekX = (currentPosition + positionChange);
+	//běž doprava, dokud není konec okna
+	if (panacekX < (window.innerWidth - panacekSirka)) {
+		element.style.left = (currentPosition + positionChange) + 'px';
+		panacekX = (currentPosition + positionChange);
+	}
 	element.src = "obrazky/panacek-vpravo.png";
 	prehraj('#hudba');
 } 
@@ -50,8 +53,11 @@ function panacekRight(elementSelector, positionChange) {
 function panacekLeft(elementSelector, positionChange) {
 	let element = document.querySelector(elementSelector);
 	let currentPosition = parseInt(element.style.left);
-	element.style.left = (currentPosition - positionChange) + 'px';
-	panacekX = (currentPosition - positionChange);
+	//běž doleva, dokud není konec okna
+	if (panacekX > 0) {
+		element.style.left = (currentPosition - positionChange) + 'px';
+		panacekX = (currentPosition - positionChange);
+	}
 	element.src = "obrazky/panacek-vlevo.png";
 	prehraj('#hudba');
 } 
@@ -59,8 +65,11 @@ function panacekLeft(elementSelector, positionChange) {
 function panacekUp(elementSelector, positionChange) {
 	let element = document.querySelector(elementSelector);
 	let currentPosition = parseInt(element.style.top);
-	element.style.top = (currentPosition - positionChange) + 'px';
-	panacekY = (currentPosition - positionChange);
+	//běž nahoru, dokud není konec okna
+	if (panacekY > 0) {
+		element.style.top = (currentPosition - positionChange) + 'px';
+		panacekY = (currentPosition - positionChange);
+	}
 	element.src = "obrazky/panacek-nahoru.png";
 	prehraj('#hudba');
 } 
@@ -68,8 +77,11 @@ function panacekUp(elementSelector, positionChange) {
 function panacekDown(elementSelector, positionChange) {
 	let element = document.querySelector(elementSelector);
 	let currentPosition = parseInt(element.style.top);
-	element.style.top = (currentPosition + positionChange) + 'px';
-	panacekY = (currentPosition + positionChange);
+	//běž dolů, dokud není konec okna
+	if (panacekY < (window.innerHeight - panacekVyska)) {
+		element.style.top = (currentPosition + positionChange) + 'px';
+		panacekY = (currentPosition + positionChange);
+	}
 	element.src = "obrazky/panacek.png";
 	prehraj('#hudba');
 } 
