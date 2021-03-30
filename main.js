@@ -1,39 +1,82 @@
 
+let mince = document.querySelector('#mince');
+let panacek = document.querySelector('#panacek');
 let panacekX;
 let panacekY; 
-const panacekSirka = 64;
-const panacekVyska = 70;
+let panacekSirka = panacek.width;
+let panacekVyska = panacek.height;
 let minceX; 
 let minceY; 
-const minceSirka = 36;
-const minceVyska = 36; 
-let score = parseInt(document.querySelector('#score').innerHTML);
+let minceSirka = mince.width;
+let minceVyska = mince.height; 
+let score = document.querySelector('#score');
+let hodnotaMince;
+let time = document.querySelector('#casovac');
+let timeScore = 0;
+let viteznaHlaska = document.querySelector('#vitezhlaska');
 
-panacekX =  Math.floor(window.innerWidth * 0.5 - (panacekSirka * 0.5));
-panacekY =  Math.floor(window.innerHeight * 0.5 - (panacekVyska * 0.5));
 
-minceX =  Math.floor(Math.random() * (window.innerWidth - minceSirka));
-minceY = Math.floor(Math.random() * (window.innerHeight - minceVyska));
+function minceRandom(){
+	//náhodná hodnota mince
+    let nahodaMince = Math.floor(Math.random() * 10 + 1)
+ 
+    if(nahodaMince >= 8){
+        mince.src = "obrazky/mince.png";
+        hodnotaMince = 3;
+    }else if(nahodaMince >= 6){
+        mince.src = "obrazky/mince-stribrna.png";
+        hodnotaMince = 2;
+    }else{
+        mince.src = "obrazky/mince-bronzova.png";
+        hodnotaMince = 1;
+    }
+
+	//náhodná pozice mince
+	minceX =  Math.floor(Math.random() * (window.innerWidth - minceSirka));
+	minceY = Math.floor(Math.random() * (window.innerHeight - minceVyska));
+	mince.style.left = minceX + 'px';
+	mince.style.top = minceY + 'px';
+ 
+}
+//přidej časovač
+function pocitejCas(){
+	setInterval(function(){
+		timeScore += 1;
+		time.innerText = timeScore + "s";
+	}, 1000);
+} 
 
 
 //init
 function init() {
-	//minceX a minceY umísti někde random
-	document.querySelector('#mince').style.left = minceX + 'px';
-	document.querySelector('#mince').style.top = minceY + 'px';
+	//zvol náhodnou minci a umísti na random pozici
+	minceRandom();
 	//panáčka zaparkuj na střed
-	document.querySelector('#panacek').style.left = panacekX + 'px';
-	document.querySelector('#panacek').style.top = panacekY + 'px';
+	panacekX =  Math.floor(window.innerWidth * 0.5 - (panacekSirka * 0.5));
+	panacekY =  Math.floor(window.innerHeight * 0.5 - (panacekVyska * 0.5));
+	panacek.style.left = panacekX + 'px';
+	panacek.style.top = panacekY + 'px';
 	//body na nulu
-	document.querySelector('#score').innerHTML = "0";
+	score.innerHTML = "0";
 	score = 0;
+	//časovač
+	time.innerHTML = timeScore + 's';
+	timeScore = 0;
+	time.style.display = "none";
 }
-init();
 
 //přehraj hudbu
 function prehraj(elementSelector) {
 	let audioElement = document.querySelector(elementSelector);
 	audioElement.play();
+}
+
+//tlacitko start
+function start() {
+	pocitejCas();
+	time.style.display = "";
+	document.querySelector('#startbutton').style.display = "none";
+	prehraj('#hudba');
 }
 
 //pohyb panáčka
@@ -42,12 +85,12 @@ function panacekRight(elementSelector, positionChange) {
 	let element = document.querySelector(elementSelector);
 	let currentPosition = parseInt(element.style.left);
 	//běž doprava, dokud není konec okna
-	if (panacekX < (window.innerWidth - panacekSirka)) {
+	if (panacekX < (window.innerWidth - panacekSirka - 10)) {
 		element.style.left = (currentPosition + positionChange) + 'px';
 		panacekX = (currentPosition + positionChange);
 	}
 	element.src = "obrazky/panacek-vpravo.png";
-	prehraj('#hudba');
+	
 } 
 
 function panacekLeft(elementSelector, positionChange) {
@@ -59,7 +102,6 @@ function panacekLeft(elementSelector, positionChange) {
 		panacekX = (currentPosition - positionChange);
 	}
 	element.src = "obrazky/panacek-vlevo.png";
-	prehraj('#hudba');
 } 
 
 function panacekUp(elementSelector, positionChange) {
@@ -71,83 +113,66 @@ function panacekUp(elementSelector, positionChange) {
 		panacekY = (currentPosition - positionChange);
 	}
 	element.src = "obrazky/panacek-nahoru.png";
-	prehraj('#hudba');
 } 
 
 function panacekDown(elementSelector, positionChange) {
 	let element = document.querySelector(elementSelector);
 	let currentPosition = parseInt(element.style.top);
 	//běž dolů, dokud není konec okna
-	if (panacekY < (window.innerHeight - panacekVyska)) {
+	if (panacekY < (window.innerHeight - panacekVyska -10)) {
 		element.style.top = (currentPosition + positionChange) + 'px';
 		panacekY = (currentPosition + positionChange);
 	}
 	element.src = "obrazky/panacek.png";
-	prehraj('#hudba');
 } 
 
 
 //zkontroluj pozici panáček - mince
 function bod () {
 	if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || panacekY + panacekVyska < minceY || minceY + minceVyska < panacekY)) {
-	//1. zahraj zvuk sebrání mince
-	prehraj('#zvukmince');
-	//2. posuň minci na jiný random
-	minceX = Math.floor(Math.random() * (window.innerWidth - minceSirka));
-	minceY = Math.floor(Math.random() * (window.innerHeight - minceVyska));
-	document.querySelector('#mince').style.left = minceX + 'px';
-	document.querySelector('#mince').style.top = minceY + 'px';
-	//3. přičti bod
-	score = score + 1;
-	document.querySelector('#score').innerHTML = score;
-	}
-	
-}
-
-//zkontroluj vítezství
-function winner () {
-	if (score == 5) {
-		//zahraj fanfáru
-		prehraj('#zvukfanfara');
-		//vypiš vítěznou hlášku
-		document.querySelector('#vitezhlaska').innerHTML = "Vítěz!!!";
+		//1. zahraj zvuk sebrání mince
+		prehraj('#zvukmince');
+		//2. přičti bod
+		score = score + hodnotaMince;
+		document.querySelector('#score').innerHTML = score;
+		//3. zkontoroluj vítezství
+		if (score >= 10) {
+			//zahraj fanfáru
+			prehraj('#zvukfanfara');
+			//vypiš vítěznou hlášku
+			viteznaHlaska.style.display = "";
+			viteznaHlaska.innerHTML = "Vyhrál jsi!!!, Hra ti trvala " + timeScore + " sekund.";
+			time.style.display = "none";
+		}
+		//4. nová náhodná mince
+		minceRandom();
 	}
 }
 
-
-//onkeydown (pravá šipka)
+//tady proveď funkce
 document.addEventListener("keydown", function(event) {
 	if (event.key === "ArrowRight") {
 		bod();
-		winner();
 		panacekRight('#panacek', 10);
-		} 		
-});
-
-//onkeydown (levá šipka)
-document.addEventListener("keydown", function(event) {
+	} 
+	
 	if (event.key === "ArrowLeft") {
 		bod();
-		winner();
 		panacekLeft('#panacek', 10);
-		}
-});
+	}
 
-//onkeydown (šipka nahoru)
-document.addEventListener("keydown", function(event) {
 	if (event.key === "ArrowUp") {
 		bod();
-		winner();
 		panacekUp('#panacek', 10);
-		}
-});
+	}
 
-//onkeydown (šipka dolů)
-document.addEventListener("keydown", function(event) {
 	if (event.key === "ArrowDown") {
 		bod();
-		winner();
 		panacekDown('#panacek', 10);
-		} 
+	} 
+		
 });
+
+
+
 

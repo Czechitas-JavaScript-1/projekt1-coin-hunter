@@ -9,13 +9,17 @@
 	<link rel="stylesheet" type="text/css" href="style.css">
 </head>
 
-<body onkyedown= "stiskKlavesy(event)">
+<body onload= "init()">
 
 	<img id="panacek" src="obrazky/panacek.png" alt="Panáček">
 
 	<img id="mince" src="obrazky/mince.png" alt="Mince">
 
 	<div id="score">0</div>
+
+	<div id="casovac"></div>
+
+	<button onclick="start()" id="startbutton">START</button>
 
 	<div id="vitezhlaska"></div>
 
