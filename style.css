@@ -48,4 +48,12 @@ body {
 
 #panacek {
 	z-index: 1;
+	top: 250px;
+	left: 460px;
+}
+
+#mince {
+	top:120px;
+	left: 180px;
+
 }

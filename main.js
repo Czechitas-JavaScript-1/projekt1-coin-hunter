@@ -7,3 +7,13 @@ if (!( panacekX + panacekSirka < minceX || minceX + minceSirka < panacekX || pan
 
 
 // sem začni psát svůj program
+
+
+
+
+let score = document.getElementById("score");
+let panacek = document.getElementById("panacek");
+let mince = document.getElementById("mince");
+
+function pohyb(event) 
+}
