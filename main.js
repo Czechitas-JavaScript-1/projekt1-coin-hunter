@@ -46,6 +46,19 @@ function pocitejCas(){
 	}, 1000);
 } 
 
+//časovač dle Filipa, aby se vypínal - není integrováno
+/* let casovac = setInterval(zacniPocitat, 1000);
+let cas = 0;
+
+function zacniPocitat() {
+  cas +=1;
+  console.log(cas);
+}
+
+function vypniCasovac() {
+  clearInterval(casovac);
+} */
+
 
 //init
 function init() {
@@ -141,7 +154,7 @@ function bod () {
 			prehraj('#zvukfanfara');
 			//vypiš vítěznou hlášku
 			viteznaHlaska.style.display = "";
-			viteznaHlaska.innerHTML = "Vyhrál jsi!!!, Hra ti trvala " + timeScore + " sekund.";
+			viteznaHlaska.innerHTML = "Vyhrál jsi! Hra ti trvala " + timeScore + " sekund.";
 			time.style.display = "none";
 		}
 		//4. nová náhodná mince
