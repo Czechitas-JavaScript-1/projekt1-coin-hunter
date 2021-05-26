@@ -129,7 +129,7 @@ function panacekRight(elementSelector, positionChange) {
 	let element = document.querySelector(elementSelector);
 	let currentPosition = parseInt(element.style.left);
 	//běž doprava, dokud není konec okna
-	if (panacekX < (780 - panacekSirka)) {
+	if (panacekX < (760 - panacekSirka)) {
 		element.style.left = (currentPosition + positionChange) + 'px';
 		panacekX = (currentPosition + positionChange);
 	}
@@ -163,7 +163,7 @@ function panacekDown(elementSelector, positionChange) {
 	let element = document.querySelector(elementSelector);
 	let currentPosition = parseInt(element.style.top);
 	//běž dolů, dokud není konec okna
-	if (panacekY < (780 - panacekVyska)) {
+	if (panacekY < (760 - panacekVyska)) {
 		element.style.top = (currentPosition + positionChange) + 'px';
 		panacekY = (currentPosition + positionChange);
 	}
@@ -198,13 +198,12 @@ function bod () {
 				document.querySelector('#qr').style.display = "block";
 			}
 			
-			
-			
 		}
 		//4. nová náhodná mince
 		minceRandom();
 	}
 }
+
 
 
 
