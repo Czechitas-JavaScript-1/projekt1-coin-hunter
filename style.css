@@ -1,6 +1,6 @@
 :root {
 	--pozadi: lightskyblue;
-	--score: red;
+	--score: white;
 }
 
 html {
@@ -14,12 +14,9 @@ html {
 }
 
 body {
-	margin: 0;
-	padding: 0;
-	height: 100vh;
-	background-color: var(--pozadi);
-	background-repeat: repeat;
-	background-image: url('obrazky/pozadi/geometry.png');
+	margin: 600;
+	padding: 30;
+	
 
 	/*  vyzkoušej i jiná pozadí :)
 	background-image: url('obrazky/pozadi/round.png');
@@ -31,46 +28,73 @@ body {
 	*/
 }
 
+.pozadi {
+	height: 800px;
+	width: 800px;
+	border: 5px solid #e20089;
+	border-radius: 5px;
+	border-style: inset;
+	margin: auto;
+	margin-top: 5%;
+	margin-left: 5%;
+	position: absolute;
+	background-image: linear-gradient(131deg, #252e83 20%, #e20089 100%);
+
+	/* background-color: var(--pozadi);
+	background-repeat: repeat;
+	background-image: url('obrazky/pozadi/weather.png') */;
+}
+
 #score {
 	position: absolute;
 	top: 50px;
 	left: 50px;
-	font-family: 'Press Start 2P', sans-serif;
-	font-size: 36px;
+	font-family: 'Patrick Hand', sans-serif;
+	font-size: 50px;
 	z-index: 999;
 	color: var(--score);
+	
 }
 
 #casovac {
 	position: absolute;
-	top: 450px;
+	top: 150px;
 	left: 50px;
-	font-family: 'Press Start 2P', sans-serif;
-	font-size: 20px;
+	font-family: 'Patrick Hand', sans-serif;
+	font-size: 40px;
 	z-index: 999;
 	color: var(--score);
 }
 
 #startbutton {
 	position: absolute;
-	top: 450px;
-	left: 50px;
-	font-family: 'Press Start 2P', sans-serif;
-	font-size: 20px;
+	top: 360px;
+	left: 550px;
+	font-family: 'Patrick Hand', sans-serif;
+	font-size: 30px;
+	padding: 5px;
 	z-index: 999;
 	color: var(--score);
+	background-image: linear-gradient(131deg, #252e83 10%, #e20089 100%);
+}
+#startbutton:hover {
+	background-image: linear-gradient(131deg, #252e83 30%, #e20089 100%);
 }
 
 
 #vitezhlaska {
 	position: absolute;
 	top: 50px;
-	left: 250px;
-	font-family: 'Press Start 2P', sans-serif;
-	font-size: 16px;
+	left: 200px;
+	font-family: 'Patrick Hand', sans-serif;
+	font-size: 25px;
 	z-index: 999;
 	color: var(--score);
 }
+h5 {
+	font-size: 30px;
+}
+
 
 #panacek,
 #mince {
@@ -80,5 +104,22 @@ body {
 #panacek {
 	z-index: 1;
 		
+}
+
+#mince {
+	top:120px;
+	left:620px;
+	border-radius: 50%;
+	box-shadow: 3px 3px 10px rgba(160, 149, 155, 0.5);;
+}
+
+a {
+	color:#F09CB7
+}
+#qr {
+	position: absolute;
+	top:250px;
+	left:250px;
+	display: none;
 }
 

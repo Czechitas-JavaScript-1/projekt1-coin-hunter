@@ -14,26 +14,30 @@ let hodnotaMince;
 let time = document.querySelector('#casovac');
 let timeScore = 0;
 let viteznaHlaska = document.querySelector('#vitezhlaska');
+let herniPole = document.querySelector('#poleHry')
+let sirkaPole = herniPole.style.width;
+let vyskaPole = herniPole.height;
+console.log(sirkaPole);
 
 
 function minceRandom(){
 	//náhodná hodnota mince
     let nahodaMince = Math.floor(Math.random() * 10 + 1)
  
-    if(nahodaMince >= 8){
-        mince.src = "obrazky/mince.png";
-        hodnotaMince = 3;
-    }else if(nahodaMince >= 6){
-        mince.src = "obrazky/mince-stribrna.png";
-        hodnotaMince = 2;
+    if(nahodaMince >= 7){
+        mince.src = "obrazky/mince-10.png";
+        hodnotaMince = 10;
+    }else if(nahodaMince >= 5){
+        mince.src = "obrazky/mince-5.png";
+        hodnotaMince = 5;
     }else{
-        mince.src = "obrazky/mince-bronzova.png";
-        hodnotaMince = 1;
+        mince.src = "obrazky/mince-2.png";
+        hodnotaMince = 2;
     }
 
 	//náhodná pozice mince
-	minceX =  Math.floor(Math.random() * (window.innerWidth - minceSirka));
-	minceY = Math.floor(Math.random() * (window.innerHeight - minceVyska));
+	minceX =  Math.floor(Math.random() * (780 - minceSirka));
+	minceY = Math.floor(Math.random() * (780 - minceVyska));
 	mince.style.left = minceX + 'px';
 	mince.style.top = minceY + 'px';
  
@@ -63,10 +67,10 @@ function vypniCasovac() {
 //init
 function init() {
 	//zvol náhodnou minci a umísti na random pozici
-	minceRandom();
+	//minceRandom();
 	//panáčka zaparkuj na střed
-	panacekX =  Math.floor(window.innerWidth * 0.5 - (panacekSirka * 0.5));
-	panacekY =  Math.floor(window.innerHeight * 0.5 - (panacekVyska * 0.5));
+	panacekX = 400-(panacekSirka * 0.5);
+	panacekY = 400-(panacekSirka * 0.5);
 	panacek.style.left = panacekX + 'px';
 	panacek.style.top = panacekY + 'px';
 	//body na nulu
@@ -76,6 +80,7 @@ function init() {
 	time.innerHTML = timeScore + 's';
 	timeScore = 0;
 	time.style.display = "none";
+	
 }
 
 //přehraj hudbu
@@ -89,7 +94,33 @@ function start() {
 	pocitejCas();
 	time.style.display = "";
 	document.querySelector('#startbutton').style.display = "none";
+	document.querySelector('#vitezhlaska').style.display = "none"
 	prehraj('#hudba');
+	minceRandom();
+
+		//tady proveď funkce
+	document.addEventListener("keydown", function(event) {
+		if (event.key === "ArrowRight") {
+			bod();
+			panacekRight('#panacek', 10);
+		} 
+		
+		if (event.key === "ArrowLeft") {
+			bod();
+			panacekLeft('#panacek', 10);
+		}
+
+		if (event.key === "ArrowUp") {
+			bod();
+			panacekUp('#panacek', 10);
+		}
+
+		if (event.key === "ArrowDown") {
+			bod();
+			panacekDown('#panacek', 10);
+		} 
+			
+	});
 }
 
 //pohyb panáčka
@@ -98,7 +129,7 @@ function panacekRight(elementSelector, positionChange) {
 	let element = document.querySelector(elementSelector);
 	let currentPosition = parseInt(element.style.left);
 	//běž doprava, dokud není konec okna
-	if (panacekX < (window.innerWidth - panacekSirka - 10)) {
+	if (panacekX < (780 - panacekSirka)) {
 		element.style.left = (currentPosition + positionChange) + 'px';
 		panacekX = (currentPosition + positionChange);
 	}
@@ -132,7 +163,7 @@ function panacekDown(elementSelector, positionChange) {
 	let element = document.querySelector(elementSelector);
 	let currentPosition = parseInt(element.style.top);
 	//běž dolů, dokud není konec okna
-	if (panacekY < (window.innerHeight - panacekVyska -10)) {
+	if (panacekY < (780 - panacekVyska)) {
 		element.style.top = (currentPosition + positionChange) + 'px';
 		panacekY = (currentPosition + positionChange);
 	}
@@ -149,42 +180,32 @@ function bod () {
 		score = score + hodnotaMince;
 		document.querySelector('#score').innerHTML = score;
 		//3. zkontoroluj vítezství
-		if (score >= 10) {
+		if (score >= 25) {
 			//zahraj fanfáru
 			prehraj('#zvukfanfara');
+			//znehybni panáčka
+			panacek.style.display = "none";
 			//vypiš vítěznou hlášku
 			viteznaHlaska.style.display = "";
-			viteznaHlaska.innerHTML = "Vyhrál jsi! Hra ti trvala " + timeScore + " sekund.";
 			time.style.display = "none";
+			if (timeScore < 9) {
+				viteznaHlaska.innerHTML = "<p>SUPER máš " + score + " korun.</p><p>Navíc jsi porazil Báru, hra ti trvala jen " + timeScore + " sekund.</p><p>Zvu tě na zmrzku. <a href='mailto:marie@dastec.cz'>Napiš mi</a>, domluvíme čas.</p>";
+			} else if(timeScore == 9) {
+				viteznaHlaska.innerHTML = "<p>SUPER máš " + score + " korun. Můžeš si koupit zmrzku.</p><p>Hra ti trvala " + timeScore + " sekund. Vyrovnal jsi skóre!</p>";
+			} else {
+				viteznaHlaska.innerHTML = "<p>SUPER máš " + score + " korun. Můžeš si koupit zmrzku.</p><p>Hra ti trvala " + timeScore + " sekund.</p><p> Bára je lepší. Koupíš jí zmrzku? :)</p>";
+				document.querySelector('#qr').style.display = "block";
+			}
+			
+			
+			
 		}
 		//4. nová náhodná mince
 		minceRandom();
 	}
 }
 
-//tady proveď funkce
-document.addEventListener("keydown", function(event) {
-	if (event.key === "ArrowRight") {
-		bod();
-		panacekRight('#panacek', 10);
-	} 
-	
-	if (event.key === "ArrowLeft") {
-		bod();
-		panacekLeft('#panacek', 10);
-	}
 
-	if (event.key === "ArrowUp") {
-		bod();
-		panacekUp('#panacek', 10);
-	}
-
-	if (event.key === "ArrowDown") {
-		bod();
-		panacekDown('#panacek', 10);
-	} 
-		
-});
 
 
 
