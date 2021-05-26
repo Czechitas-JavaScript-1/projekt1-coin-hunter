@@ -183,8 +183,9 @@ function bod () {
 		if (score >= 25) {
 			//zahraj fanfáru
 			prehraj('#zvukfanfara');
-			//znehybni panáčka
+			//schovej panáčka a minci
 			panacek.style.display = "none";
+			mince.style.display = "none";
 			//vypiš vítěznou hlášku
 			viteznaHlaska.style.display = "";
 			time.style.display = "none";
