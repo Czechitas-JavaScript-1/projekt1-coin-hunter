@@ -189,9 +189,9 @@ function bod () {
 			//vypiš vítěznou hlášku
 			viteznaHlaska.style.display = "";
 			time.style.display = "none";
-			if (timeScore < 9) {
+			if (timeScore < 8) {
 				viteznaHlaska.innerHTML = "<p>SUPER máš " + score + " korun.</p><p>Navíc jsi porazil Báru, hra ti trvala jen " + timeScore + " sekund.</p><p>Zvu tě na zmrzku. <a href='mailto:marie@dastec.cz'>Napiš mi</a>, domluvíme čas.</p>";
-			} else if(timeScore == 9) {
+			} else if(timeScore == 8) {
 				viteznaHlaska.innerHTML = "<p>SUPER máš " + score + " korun. Můžeš si koupit zmrzku.</p><p>Hra ti trvala " + timeScore + " sekund. Vyrovnal jsi skóre!</p>";
 			} else {
 				viteznaHlaska.innerHTML = "<p>SUPER máš " + score + " korun. Můžeš si koupit zmrzku.</p><p>Hra ti trvala " + timeScore + " sekund.</p><p> Bára je lepší. Koupíš jí zmrzku? :)</p>";
