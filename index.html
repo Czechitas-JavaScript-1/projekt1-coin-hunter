@@ -7,25 +7,42 @@
 	<title>Coin Hunter</title>
 	<link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
 	<link rel="stylesheet" type="text/css" href="style.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+	<link href="https://fonts.googleapis.com/css2?family=Patrick+Hand&display=swap" rel="stylesheet">
 </head>
 
-<body>
+<body onload= "init()">
+	<div class="pozadi" id="poleHry">
+		<img id="panacek" src="obrazky/panacek.png" alt="Panáček">
 
+		<img id="mince" src="obrazky/mince-10.png" alt="Mince">
 
+		<div id="score"></div>
 
-	<img id="panacek" src="obrazky/panacek.png" alt="Panáček">
+		<div id="casovac"></div>
 
-	<!--
-	<img id="mince" src="obrazky/mince.png" alt="Mince">
+		<button onclick="start()" id="startbutton">START</button>
 
-	<div id="score">0</div>
+		<div id="vitezhlaska">
+			<h5>Pochytej mince, ať máš na zmrzku</h5>
+			<p>Mimoň se pohybuje pomocí šipek.</p>
+			<p>Zmrzka stojí 25Kč.</p>
+			<p>Moje 6 letá dcera Bára to dala za 8 vteřin. Umíš to rychleji?</p>
+		</div>
+		<div id="qr">
+			<img src="obrazky/qr.png" alt="qrkod">
+		</div>
+	</div>
+	<p>Hra vznikla jako programovací cvičení v rámci kurzu JavaScript s <a href="https://www.czechitas.cz/cs/">Czechitas</a></p>
+	
+	
 
-	<audio id="hudba" src="zvuky/hudba.mp3" autoplay loop></audio>
+	<audio id="hudba" src="zvuky/hudba.mp3" autoplay loop ></audio>
 
 	<audio id="zvukmince" src="zvuky/mince.mp3"></audio>
 
 	<audio id="zvukfanfara" src="zvuky/fanfara.mp3"></audio>
-	-->
+	
 
 	<script src="main.js"></script>
 </body>
